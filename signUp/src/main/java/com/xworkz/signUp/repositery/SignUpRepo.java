@@ -13,6 +13,10 @@ public interface SignUpRepo {
 		return Collections.emptyList();
 	}
 	
-	
+	 default List<EntityDto> LogInUsingEmailAndPassword (String email,String password) {
+	    	
+	    	return Collections.emptyList();
+	    	
+	    }
 	
 }

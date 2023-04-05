@@ -27,4 +27,6 @@ public interface SignUpService {
 	default Long findByUser(String user) {
 		return null;
 	}
+	
+	//boolean sendEmail(String emailId);
 }

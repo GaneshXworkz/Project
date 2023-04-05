@@ -13,10 +13,10 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name ="SignUp_project")
-@NamedQuery(name = "find",query = "select ent from SignUpEntity ent")
-@NamedQuery(name = "userId",query = "select count(*) from  SignUpEntity ent where ent.userId=:userBy")
-@NamedQuery(name = "emailId",query = "select count(*) from  SignUpEntity ent where ent.email=:emailBy")
-@NamedQuery(name = "mobileId",query = "select count(*) from  SignUpEntity ent where ent.mobile=:mobileBy")
+@NamedQuery(name = "find",query = "select ent from EntityDto ent")
+@NamedQuery(name = "userId",query = "select count(*) from  EntityDto ent where ent.userId=:userBy")
+@NamedQuery(name = "emailId",query = "select count(*) from  EntityDto ent where ent.email=:emailBy")
+@NamedQuery(name = "mobileId",query = "select count(*) from  EntityDto ent where ent.mobile=:mobileBy")
 public class EntityDto {
 	
 	@Id
@@ -30,7 +30,7 @@ public class EntityDto {
 	private String email;
 	
 	@Column(name = "mobile")
-	private String mobile;
+	private Long mobile;
 	
 	@Column(name = "password")
 	private String password;

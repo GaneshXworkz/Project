@@ -94,7 +94,31 @@ public class SignUpServiceImpl implements SignUpService {
 	
 	
 	
-	
+	@Override
+	public List<SignUpDto> validateLogInUsingEmailAndPassword(String email, String password) {
+		System.out.println("Running Serach By Email And Password");
+		List<EntityDto> login=this.signUpRepo.LogInUsingEmailAndPassword(email, password);
+		List<SignUpDto> dtos=new ArrayList<>();
+		
+		if(email!=null && !email.isEmpty()&& password!=null && !password.isEmpty()) {
+		    for(EntityDto entityDto :login) {
+		    	SignUpDto dto=new SignUpDto();
+		    	BeanUtils.copyProperties(entityDto, dto);
+		    	dtos.add(dto);
+		    	
+		    } 
+		return dtos;
+			
+			
+		}else {
+			System.out.println("no data found in db");
+			return Collections.emptyList();
+		}
+		
+		
+		
+		
+	}
 	
 	
 

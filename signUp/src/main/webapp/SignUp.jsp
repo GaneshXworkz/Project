@@ -55,12 +55,12 @@ m-5 pb-5 bg-info">
      <tr><td>NAME :</td><td><input type="text" name="name" value="${SignUpDto.name}"></td></tr><br>
      
       <tr><td>EMAIL :</td><td><input type="text" name="email" value="${SignUpDto.email}"></td>
-      <td><span style="color:red">${emailError}</span></td></tr><br>
+      <td><span style="color:red">${emailError}</span></td></tr>
      
       <tr><td>MOBIAL NO :</td><td><input type="text" name="mobilNo" value="${SignUpDto.mobilNo}"></td>
-       <td><span style="color:red">${mobilNo}</span></td></tr><br>
+       <td><span style="color:red">${mobilNo}</span></td></tr>
 
-      <tr><td>PASSWORD :</td><td><input type="password" name="password" value="${SignUpDto.password}"></td></tr><br>
+      <tr><td>PASSWORD :</td><td><input type="password" name="password" value="${SignUpDto.password}"></td></tr>
 
       <tr><td> CONFORM PASSWORD :</td><td><input type="password" name="conformPassword" value="${SignUpDto.conformPassword}"></td></tr><br>
 
@@ -75,20 +75,7 @@ m-5 pb-5 bg-info">
 <h4 style="color: red;">${password}</h4>
 
 <script>
-/* function Display() {
-	   
-	  console.log('running is display');
-	  const xhttp =new XMLHttpRequest();
-	  xhttp.open("GET","http://localhost:8899/")
-	  xhttp.send();
-	  
-	  xhttp.onlode=function(){
-		  console.log(this);
-		   document.getElementById("show").innerHTML =this.responseText
-		   var json=JSON.parse(this.responseText);
-	  }
-	
-} */
+
 
 </script>
 

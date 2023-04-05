@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,34 @@ public class SignUpRepoImpl implements SignUpRepo{
 			em.close();
 		}
 	}
+	
+	
+	@Override
+	public List<EntityDto> LogInUsingEmailAndPassword(String email, String password) {
+		System.out.println("Search By palce in repo...");
+		EntityManager entityManager=this.entityManagerFactory.createEntityManager();
+		
+		try {
+			Query query=entityManager.createNamedQuery("SearchByEmailAndPassword");
+			query.setParameter("mail", email);
+			query.setParameter("pswd",password);
+			List<EntityDto> list=query.getResultList();
+			list.forEach(p ->System.out.println(p));
+			return list;
+			
+			
+			
+		}catch (PersistenceException e) {
+			e.printStackTrace();
+		}finally {
+			entityManager.close();
+		}
+		
+		
+		
+	return 	SignUpRepo.super.LogInUsingEmailAndPassword(email, password);
+	}
+	
+	
 
 }

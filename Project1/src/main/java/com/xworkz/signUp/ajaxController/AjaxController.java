@@ -46,10 +46,25 @@ public class AjaxController {
 
 		if (dbNumber == 0) {
 			System.err.println("Running in equals condition");
+			return null;
+
+		} else {
+			return "mobile exist" ;
+		}
+	
+	}
+	
+	@GetMapping(value = "/userId/{user}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String onMobile(@PathVariable String user) {
+		Long dbuser = this.service.findByUser(user);
+		System.err.println(dbuser);
+
+		if (dbuser == 0) {
+			System.err.println("Running in equals condition");
 			return "";
 
 		} else {
-			return "Mobile Number exsist";
+			return "User Id exist";
 		}
 	
 	}

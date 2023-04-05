@@ -4,12 +4,14 @@ import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 
+import org.jboss.jandex.PositionBasedTypeTarget;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xworkz.signUp.dto.SignUpDto;
 import com.xworkz.signUp.service.SignUpService;
@@ -98,4 +100,38 @@ public class SignUpController {
 		}
        return "SignUp";
 	}
+	
+	//**************************************************************************************
+	@GetMapping("/logIn")
+    public String logIn(@RequestParam String email,@RequestParam String password, Model model, SignUpDto dto) {
+		System.out.println("Log In running......!");
+		
+		
+		List<SignUpDto> list=this.signUpService.validateLogInUsingEmailAndPassword(email, password);
+		
+		if(email!=null && !email.isEmpty() && password!=null && !password.isEmpty()) {
+		
+			for(SignUpDto signUpDto:list) {
+				if(dto.getEmail().equals(signUpDto.getEmail())&& dto.getPassword().equals(signUpDto.getPassword())) {
+					
+					return "success";
+				}
+				else {
+					
+					model.addAttribute("message","Email Or password is Wrong");
+				}
+				return "logIn";
+			}
+			
+			
+			
+		}else {
+			model.addAttribute("email","please enter Email Id");
+			model.addAttribute("password","please Enter password");
+		}
+		return "logIn";
+	}
+	
+//*********************************************************************************************************************	
+	
 }

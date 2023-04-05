@@ -22,7 +22,7 @@ default Long findByEmail(String email) {
 	return null;
 }
 
-default Long findByMobile(Long number) {
+default Long findByMobile(Long mobile) {
 	return null;
 }
 

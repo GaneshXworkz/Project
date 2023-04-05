@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 
 import com.xworkz.signUp.dto.SignUpDto;
+import com.xworkz.signUp.entityDto.EntityDto;
 
 public interface SignUpService {
 
@@ -15,6 +16,12 @@ public interface SignUpService {
 	default List<SignUpDto> findAll() {
 		return Collections.emptyList();
 	}
+	
+	default List<SignUpDto> validateLogInUsingEmailAndPassword (String email,String password) {
+    	
+    	return Collections.emptyList();
+    	
+    }
 	
 	
 	}

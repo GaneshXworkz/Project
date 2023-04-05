@@ -2,8 +2,10 @@ package com.xworkz.signUp.service;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Properties;
 import java.util.Set;
 
+import javax.mail.Authenticator;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -13,6 +15,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mysql.cj.Session;
 import com.xworkz.signUp.Entity.EntityDto;
 import com.xworkz.signUp.dto.SignUpDTO;
 import com.xworkz.signUp.repositery.SignUpRepo;
@@ -43,9 +46,7 @@ public class SignUpServiceImpl implements SignUpService {
 		Long emailCount = this.repository.findByEmail(signUpDTO.getEmail());
 		Long userCount = this.repository.findByUser(signUpDTO.getUserId());
 		Long mobileCount = this.repository.findByMobile(signUpDTO.getMobile());
-		log.error("emailCount-" + emailCount);
-		log.error("userCount-" + userCount);
-		log.error("mobileCount-" + mobileCount);
+		
 		if (emailCount == 0 && userCount == 0 && mobileCount == 0)
 		{
 			if (signUpDTO.getPassword().equals(signUpDTO.getPassword()))
@@ -58,10 +59,7 @@ public class SignUpServiceImpl implements SignUpService {
 					return violations;
 				}
 				else {
-					log.info("No Violations procceding to save");
-					log.error("emailCount--" + emailCount);
-					log.error("userCount--" + userCount);
-					log.error("mobileCount--" + mobileCount);
+					
 					EntityDto entity = new EntityDto();
 					entity.setCreatedBy(signUpDTO.getUserId());
 					entity.setCreatedDate(LocalDateTime.now());
@@ -104,8 +102,36 @@ public class SignUpServiceImpl implements SignUpService {
 		Long userCount = this.repository.findByUser(user);
 		return userCount;
 	}
-	
 
+	/*@Override
+	public boolean sendEmail(String emailId) {
+		String portNumber="587";
+		String hostName="smtp.office365.com";
+		String formEmail="ganeshKp1998@gamil.com";
+		String password="Dvg@1998";
+		String to = emailId;
+		
+		Properties prop=new Properties();
+		prop.put("mail.smtp.host", hostName);
+		prop.put("mail.smtp.port", portNumber);
+		prop.put("mail.smtp.sttartls.enable", true);
+		prop.put("mail.debug", true);
+		prop.put("mail.smtp.auth", true);
+		prop.put("mail.transport.protocal", "smtp");
+		
+	   javax.mail.Session session=javax.mail.Session.getInstance(prop,new Authenticator() {
+	}
+	   
+			   )
+		*/
+		
+		
+		
+		
+		
+	
+	
+   
 	
 	
 }

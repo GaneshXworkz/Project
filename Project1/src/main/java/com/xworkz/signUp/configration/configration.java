@@ -43,7 +43,7 @@ public class configration {
 	public LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean() {
 		log.info("registering LocalContainerEntityManagerFactoryBean");
 		LocalContainerEntityManagerFactoryBean bean = new LocalContainerEntityManagerFactoryBean();
-		bean.setPackagesToScan("com.xworkz.signUp.configration");
+		bean.setPackagesToScan("com.xworkz.signUp");
 		bean.setDataSource(dataSource());
 		bean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		return bean;

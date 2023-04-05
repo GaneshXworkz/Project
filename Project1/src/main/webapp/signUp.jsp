@@ -50,6 +50,9 @@ m-5 pb-5 bg-info" >
 						<td>User ID</td><td> <input type="text" name="userId" value="${dto.userId}" id="userName"
 							onchange="ValideName()"></td>
 							 <span id="nameError" style="color: red"></span><br>
+							<span style="color: red" >${userIdExites}</span>
+							
+							
 					</div></tr>
 					
 					<tr>
@@ -57,6 +60,7 @@ m-5 pb-5 bg-info" >
 						<td>Email</td><td><input type="email" name="email" id="emailId" value="${dto.email}"
 							onchange="valideEmail()"></td>
 							 <span id="emailError" style="color: red"></span><br>
+							 <span style="color: red" >${EmailIsExist}</span>
 					</div>
 					</tr>
 					
@@ -65,6 +69,7 @@ m-5 pb-5 bg-info" >
 						<td>Mobile Number</td><td><input type="number" name="mobile" id="userMobile" value="${dto.mobile}"
 							onchange="ValideMobile()"></td> 
 							<span id="mobileError" style="color: red"></span> <br>
+							<span style="color: red" >${mobialExites}</span>
 					</div>
 					</tr>
 					
@@ -102,6 +107,22 @@ m-5 pb-5 bg-info" >
 		</form>
 	<h4 style="color: red;">${password}</h4>
 	<script>
+	    function DispalyDto() {
+	    	console.log('running in display');
+	    	const xhttp=new XMLHttpRquest();
+	    	xhttp.open("GET", "http://localhost:8899/Project1/dto/")
+	    	xhttp.send();
+	    	
+	    	xhttp.onload=function(){
+	    		console.log(this)
+	    		document.getElementById("showDTO").innerHTML=this.responseText
+	    		var json=JSON.parse(this.responseText);
+	    	}	
+		}
+	
+	
+	
+	
 		function myFunction() {
 			var x = document.getElementById("userPassword");
 			if (x.type === "password") {
@@ -127,6 +148,20 @@ m-5 pb-5 bg-info" >
 						&& uservalue.length > 3 && uservalue.length < 30) {
 					console.log('valide name');
 					document.getElementById('nameError').innerHTML = '';
+					const xhttp = new XMLHttpRequest();
+					console.log("Running in ajax");
+					console.log(userEmailvalue);
+					xhttp.open("GET", "http://localhost:8899/Project1/userId/"
+							+uservalue );
+					xhttp.send();
+					
+					xhttp.onload = function () {
+						console.log(this);
+						
+						document.getElementById("display").innerHTML = this.responseText
+						
+					}
+					
 				} else {
 					console.log('invalide name');
 					document.getElementById('nameError').innerHTML = 'Plese enter valide name min 4 and max 30 character';
@@ -139,7 +174,8 @@ m-5 pb-5 bg-info" >
 			var userEmailvalue = userEmail.value;
 			console.log(userEmailvalue);
 			if (userEmailvalue != null && userEmailvalue != ""
-					&& userEmailvalue.length > 4 && userEmailvalue.length < 40) {
+					&& userEmailvalue.length > 4 && userEmailvalue.length < 40)
+			{
 				console.log('valide email');
 				document.getElementById('emailError').innerHTML = '';
 			} else {
@@ -149,7 +185,7 @@ m-5 pb-5 bg-info" >
 			const xhttp = new XMLHttpRequest();
 			console.log("Running in ajax");
 			console.log(userEmailvalue);
-			xhttp.open("GET", "http://localhost:8080/sahana-xworkz-cm/email/"
+			xhttp.open("GET", "http://localhost:8899/Project1/register/"
 					+userEmailvalue);
 			xhttp.send();
 			
@@ -166,10 +202,12 @@ m-5 pb-5 bg-info" >
 			var userMobilevalue = userMobile.value;
 			console.log(userMobilevalue);
 			if (userMobilevalue != null && userMobilevalue != ""
-					&& userMobilevalue.length == 10) {
+					&& userMobilevalue.length == 10)
+			{
 				console.log('valide mobile');
 				document.getElementById('mobileError').innerHTML = '';
-			} else {
+			}
+			else {
 				console.log('invalide mobile');
 				document.getElementById('mobileError').innerHTML = 'Plese enter valide Mobile Number';
 			}
@@ -183,17 +221,21 @@ m-5 pb-5 bg-info" >
 			console.log(userPasswordvalue);
 			if (userPasswordvalue != null && userPasswordvalue != ""
 					&& userPasswordvalue.length > 4
-					&& userPasswordvalue.length < 12) {
-				if (userPasswordvalue == userConfirmPasswordvalue) {
+					&& userPasswordvalue.length < 12)
+			{
+				if (userPasswordvalue == userConfirmPasswordvalue)
+				{
 					console.log('valide both password are same');
 					document.getElementById('passwordCompare').innerHTML = '';
-				} else {
+				} 
+				else {
 					console.log('valide both password are not same');
 					document.getElementById('passwordCompare').innerHTML = 'Password and ConfirmPassword must be same';
 				}
 				console.log('valide password');
 				document.getElementById('passwordError').innerHTML = '';
-			} else {
+			} 
+			else {
 				console.log('invalide password');
 				document.getElementById('passwordError').innerHTML = 'Plese enter valide password';
 			}

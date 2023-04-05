@@ -23,6 +23,7 @@ import lombok.ToString;
 @ToString
 @Table(name="signUp_table")
 @NamedQuery(name = "find",query = "select ent from EntityDto ent")
+@NamedQuery(name = "SearchByEmailAndPassword", query = "select ent from EntityDto ent where ent.email=:mail And ent.password=:pswd")
 public class EntityDto {
 	
 	@Id
@@ -46,12 +47,7 @@ public class EntityDto {
 	 
 	
 	
-	
-	
-	
-	
-	
-	
+
 	@Column(name="C_createdBy")
 	 private String createdBy;
 	 
